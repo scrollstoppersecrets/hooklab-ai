@@ -1,4 +1,10 @@
 .env
+# Data folders we don't want in git
+data/downloads/
+data/transcripts/
+
+# Local sanity / scratch code
+sanity_checks/
 
 # Python venvs
 .venv/
