@@ -33,13 +33,23 @@ def get_assemblyai_api_key() -> str:
         )
     return api_key
 
+def get_openai_api_key() -> str:
+    key = os.getenv("OPENAI_API_KEY")
+    if not key:
+        raise RuntimeError(
+            "OPENAI_API_KEY is not set."
+        )
+    return key
+
 # --- Data Directories ----
 DATA_DIR = BASE_DIR / "data"
 DOWNLOADS_DIR = DATA_DIR / "downloads"
 TRANSCRIPTS_DIR = DATA_DIR / "transcripts"
+ANALYSIS_DIR = DATA_DIR / "analysis"
+PROMPTS_DIR = DATA_DIR / "prompts"
 
 # Make sure dir's exits
-for directory in (DATA_DIR, DOWNLOADS_DIR, TRANSCRIPTS_DIR):
+for directory in (DATA_DIR, DOWNLOADS_DIR, TRANSCRIPTS_DIR, ANALYSIS_DIR):
     directory.mkdir(parents=True, exist_ok=True)
 
 # --- YouTube / yt-dpl Defaults --- 

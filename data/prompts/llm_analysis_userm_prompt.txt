@@ -1,0 +1,72 @@
+Analyze the following video transcript and return a JSON object with this exact shape:
+
+{
+  "summary": {
+    "one_sentence": string,
+    "detailed": string
+  },
+  "hook": {
+    "hook_text": string,                  // the main opening hook
+    "hook_type": string,                  // e.g. "big claim", "pattern interrupt", "question", "story teaser"
+    "strength": "strong" | "medium" | "weak",
+    "why_it_works": string,
+    "improvement_ideas": string
+  },
+  "open_loops": [
+    {
+      "text": string,                     // what is teased but not immediately resolved
+      "purpose": string,                  // why it hooks curiosity
+      "is_resolved": boolean,
+      "where_resolved": "early" | "middle" | "late" | "not_resolved"
+    }
+  ],
+  "structure": {
+    "sections": [
+      {
+        "label": string,                  // e.g. "Hook", "Problem", "Story", "Mechanism", "Proof", "Offer", "CTA"
+        "description": string,            // what happens in this section
+        "position": "very_beginning" | "early" | "middle" | "late" | "end"
+      }
+    ],
+    "pacing_notes": string               // comments on pacing, buildup, and energy
+  },
+  "psychology": {
+    "target_audience": string,           // who this seems to be for
+    "main_pain_points": [string],
+    "main_desires": [string],
+    "main_objections_addressed": [string],
+    "core_mechanism": string,            // the "big idea" or unique mechanism
+    "credibility_elements": [string]     // proof, authority, social proof, etc.
+  },
+  "ctas": {
+    "primary_ctas": [
+      {
+        "text": string,
+        "cta_type": "subscribe" | "like_comment" | "opt_in" | "buy" | "click_link" | "follow" | "other",
+        "position": "early" | "middle" | "late" | "end",
+        "strength": "strong" | "medium" | "weak"
+      }
+    ],
+    "urgency_or_scarcity": [string]      // deadlines, limited spots, etc.
+  },
+  "style_and_tone": {
+    "overall_tone": string,              // e.g. "high-energy", "calm teacher", "hype", "rant", etc.
+    "language_style": string,            // e.g. "simple/clear", "technical", "story-driven"
+    "pattern_interrupts": [string],      // surprising moments, jokes, visual cues implied in script
+    "memorable_lines": [string]
+  },
+  "improvement_opportunities": {
+    "hook": [string],
+    "clarity_and_structure": [string],
+    "offer_and_cta": [string],
+    "emotional_impact": [string],
+    "other": [string]
+  }
+}
+
+Rules:
+- Do NOT include any keys outside of this shape.
+- Every list should be present (can be empty).
+- If some element is not present in the transcript, explain that briefly in the relevant field instead of omitting it.
+
+Now here is the transcript and metadata:
