@@ -47,9 +47,10 @@ DOWNLOADS_DIR = DATA_DIR / "downloads"
 TRANSCRIPTS_DIR = DATA_DIR / "transcripts"
 ANALYSIS_DIR = DATA_DIR / "analysis"
 PROMPTS_DIR = DATA_DIR / "prompts"
+METRICS_DIR = DATA_DIR / "metrics"
 
 # Make sure dir's exits
-for directory in (DATA_DIR, DOWNLOADS_DIR, TRANSCRIPTS_DIR, ANALYSIS_DIR):
+for directory in (DATA_DIR, DOWNLOADS_DIR, TRANSCRIPTS_DIR, ANALYSIS_DIR, METRICS_DIR):
     directory.mkdir(parents=True, exist_ok=True)
 
 # --- YouTube / yt-dpl Defaults --- 
@@ -59,3 +60,4 @@ for directory in (DATA_DIR, DOWNLOADS_DIR, TRANSCRIPTS_DIR, ANALYSIS_DIR):
 YTDLP_OUTPUT_TEMPLATE = str(DOWNLOADS_DIR / "%(id)s.%(ext)s")
 
 DEFAULT_AUDIO_FORMAT = "bestaudio/best"
+DEFAULT_METRICS_CSV = METRICS_DIR / "FullLenVideosCleaned.csv"

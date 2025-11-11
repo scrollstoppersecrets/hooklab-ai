@@ -1,0 +1,62 @@
+{
+  "summary": {
+    "one_sentence": "The transcript is incoherent and lacks meaningful content, making it impossible to analyze typical video marketing elements.",
+    "detailed": "The provided transcript consists mostly of nonsensical phrases, mixed languages, and fragmented words without clear sentences or narrative. There is no discernible hook, story, offer, or call to action present. As a result, standard analysis of conversion psychology, storytelling structure, or CTAs cannot be performed."
+  },
+  "hook": {
+    "hook_text": "No coherent hook present due to transcript incoherence.",
+    "hook_type": "none",
+    "strength": "weak",
+    "why_it_works": "Not applicable as there is no meaningful hook.",
+    "improvement_ideas": "Provide a clear, attention-grabbing opening statement or question relevant to the video's topic."
+  },
+  "open_loops": [],
+  "structure": {
+    "sections": [],
+    "pacing_notes": "No identifiable pacing or structure due to lack of coherent content."
+  },
+  "psychology": {
+    "target_audience": "Not identifiable from transcript.",
+    "main_pain_points": [],
+    "main_desires": [],
+    "main_objections_addressed": [],
+    "core_mechanism": "Not present.",
+    "credibility_elements": []
+  },
+  "ctas": {
+    "primary_ctas": [],
+    "urgency_or_scarcity": []
+  },
+  "style_and_tone": {
+    "overall_tone": "Indiscernible due to incoherent transcript.",
+    "language_style": "Fragmented and nonsensical; no clear style.",
+    "pattern_interrupts": [],
+    "memorable_lines": []
+  },
+  "improvement_opportunities": {
+    "hook": [
+      "Create a clear and compelling hook within the first 3 seconds to capture attention."
+    ],
+    "clarity_and_structure": [
+      "Use coherent sentences and logical flow to enable narrative and persuasive elements.",
+      "Introduce a clear problem and solution framework."
+    ],
+    "offer_and_cta": [
+      "Include a clear call to action with specific instructions or incentives."
+    ],
+    "emotional_impact": [
+      "Incorporate emotional triggers such as curiosity, urgency, or social proof."
+    ],
+    "other": [
+      "Ensure transcript accuracy and language consistency to facilitate analysis and viewer comprehension."
+    ]
+  },
+  "_meta": {
+    "video_id": "1FEeu-mS2_Y",
+    "source": "youtube",
+    "url": "https://www.youtube.com/watch?v=1FEeu-mS2_Y",
+    "title": "La Oportunidad Perdida de Jaguar",
+    "analyzed_at": "2025-11-11T19:41:50.450161+00:00",
+    "model": "gpt-4.1-mini"
+  }
+}
