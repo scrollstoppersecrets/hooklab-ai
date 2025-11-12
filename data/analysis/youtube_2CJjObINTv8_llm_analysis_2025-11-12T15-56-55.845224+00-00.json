@@ -1,0 +1,155 @@
+{
+  "summary": {
+    "one_sentence": "This video tutorial explains how to run the Deepseek R1 AI model locally on your computer using a ChatGPT-like graphical user interface for free.",
+    "detailed": "The creator walks viewers through setting up the Deepseek R1 model locally by installing necessary software like Ollama and Docker Desktop, then demonstrates how to use Open Web UI to interact with the model via a chat interface similar to ChatGPT. The video covers installation steps, troubleshooting login, selecting different AI models, and testing responses, emphasizing offline capability and ease of use."
+  },
+  "hook": {
+    "hook_text": "In this video I'm going to show you how you can run the same model using a graphical user Interface Just like ChatGPT.",
+    "hook_type": "big claim",
+    "strength": "medium",
+    "why_it_works": "It immediately promises a familiar and user-friendly ChatGPT-like experience for running a complex AI model locally, appealing to viewers interested in AI and local hosting.",
+    "improvement_ideas": "Make the hook more attention-grabbing by emphasizing the 'free' and 'offline' benefits upfront or by starting with a question or surprising fact to create stronger curiosity."
+  },
+  "open_loops": [
+    {
+      "text": "How to get a ChatGPT-like web UI running locally without internet connection.",
+      "purpose": "Creates curiosity about achieving a familiar AI chat experience offline, which is unusual and valuable.",
+      "is_resolved": true,
+      "where_resolved": "middle"
+    },
+    {
+      "text": "How to install and configure Ollama, Docker, and Open Web UI to run Deepseek R1 locally.",
+      "purpose": "Keeps viewers engaged by promising step-by-step setup instructions for a complex process.",
+      "is_resolved": true,
+      "where_resolved": "middle"
+    },
+    {
+      "text": "What performance differences exist between different Deepseek R1 models (1.5B, 8B, 14B).",
+      "purpose": "Maintains interest by teasing model comparison and practical usage insights.",
+      "is_resolved": true,
+      "where_resolved": "late"
+    }
+  ],
+  "structure": {
+    "sections": [
+      {
+        "label": "Hook",
+        "description": "Introduces the video topic and promises a ChatGPT-like GUI for Deepseek R1.",
+        "position": "very_beginning"
+      },
+      {
+        "label": "Setup Instructions",
+        "description": "Explains how to download and install Ollama and Docker Desktop with references to previous videos for detailed steps.",
+        "position": "early"
+      },
+      {
+        "label": "Open Web UI Installation",
+        "description": "Guides through downloading and running Open Web UI via terminal commands and Docker Desktop.",
+        "position": "middle"
+      },
+      {
+        "label": "Login and Access",
+        "description": "Shows how to handle account creation or sign-in to access the local web UI.",
+        "position": "middle"
+      },
+      {
+        "label": "Model Selection and Usage",
+        "description": "Demonstrates selecting different Deepseek R1 models and interacting with them through chat, including performance differences.",
+        "position": "late"
+      },
+      {
+        "label": "Conclusion",
+        "description": "Summarizes the process and confirms successful local usage of Deepseek R1 with a ChatGPT-like interface.",
+        "position": "end"
+      }
+    ],
+    "pacing_notes": "The video maintains a steady, instructional pace with clear step-by-step guidance. Energy is moderate, focusing on clarity over hype. The buildup is logical, moving from setup to usage, but could benefit from more dynamic transitions or visual emphasis to maintain engagement."
+  },
+  "psychology": {
+    "target_audience": "Tech-savvy AI enthusiasts and developers interested in running AI models locally with user-friendly interfaces.",
+    "main_pain_points": [
+      "Complexity of running AI models locally",
+      "Lack of user-friendly interfaces for local AI",
+      "Dependence on internet connection for AI chatbots"
+    ],
+    "main_desires": [
+      "Easy setup of local AI models",
+      "ChatGPT-like conversational UI",
+      "Offline AI usage",
+      "Free access without cloud costs"
+    ],
+    "main_objections_addressed": [
+      "Difficulty of installation",
+      "Need for internet connection",
+      "Performance and usability concerns"
+    ],
+    "core_mechanism": "Using Ollama and Docker to run Deepseek R1 locally combined with Open Web UI to provide a ChatGPT-like offline graphical interface.",
+    "credibility_elements": [
+      "Reference to previous tutorial videos",
+      "Live demonstration of installation and usage",
+      "Showing actual model responses and UI",
+      "Mention of GitHub repository and official websites"
+    ]
+  },
+  "ctas": {
+    "primary_ctas": [
+      {
+        "text": "If you still don't get it, go ahead and watch my previous video and you will see how to do this process from scratch.",
+        "cta_type": "click_link",
+        "position": "early",
+        "strength": "medium"
+      },
+      {
+        "text": "You can watch that video, it will be right in the card or you can check it out from the description below.",
+        "cta_type": "click_link",
+        "position": "early",
+        "strength": "medium"
+      }
+    ],
+    "urgency_or_scarcity": []
+  },
+  "style_and_tone": {
+    "overall_tone": "calm teacher",
+    "language_style": "simple/clear instructional",
+    "pattern_interrupts": [],
+    "memorable_lines": [
+      "Just like ChatGPT, this might be very familiar to you.",
+      "Open Web UI is an extensible self hosted AI interface that adapts to your workflow or all while working entirely offline.",
+      "If I turn off my WiFi, this is still going to work."
+    ]
+  },
+  "improvement_opportunities": {
+    "hook": [
+      "Start with a more compelling question or surprising fact to grab attention immediately.",
+      "Highlight the 'free' and 'offline' benefits in the first 3 seconds.",
+      "Use a visual or verbal pattern interrupt to break typical tutorial intros."
+    ],
+    "clarity_and_structure": [
+      "Segment the video into clearer chapters or on-screen titles for each step.",
+      "Reduce references to previous videos by briefly summarizing key setup steps here.",
+      "Add more visual cues or graphics to illustrate commands and UI elements."
+    ],
+    "offer_and_cta": [
+      "Include a stronger, direct CTA encouraging viewers to subscribe or follow for more AI tutorials.",
+      "Add a soft CTA inviting viewers to comment their experience or questions.",
+      "Mention any downloadable resources or links explicitly in the video."
+    ],
+    "emotional_impact": [
+      "Incorporate excitement or enthusiasm when showing the offline functionality.",
+      "Use storytelling elements about why local AI is valuable or transformative.",
+      "Add testimonials or user reactions if available."
+    ],
+    "other": [
+      "Improve audio clarity and pacing to maintain higher energy.",
+      "Use captions or highlights for important commands and URLs."
+    ]
+  },
+  "_meta": {
+    "video_id": "2CJjObINTv8",
+    "source": "youtube",
+    "url": "https://www.youtube.com/watch?v=2CJjObINTv8",
+    "title": "Run Deepseek R1 Locally on your Computer with ChatGPT like GUI for free",
+    "analyzed_at": "2025-11-12T15:56:55.845224+00:00",
+    "model": "gpt-4.1-mini"
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "summary": {
+    "one_sentence": "The video critiques the current AI agent space, warning against narrow thinking, reliance on templates, and lack of originality while encouraging adaptability and authentic community engagement.",
+    "detailed": "Drake from AI Foundations shares his personal frustrations with the AI agent industry, highlighting three main problems: going all-in on the wrong platforms or ideas leading to lost income and misguiding others; overreliance on templates and quick fixes instead of learning to build and adapt; and the widespread lack of originality with many creators copying each other. He emphasizes the importance of adaptability, developing core principles, and fostering genuine human interaction to succeed in the rapidly evolving AI revolution. The video ends with an invitation for open discussion and a soft CTA to subscribe and engage."
+  },
+  "hook": {
+    "hook_text": "The AI agent space is going absolutely insane right now, with $20,000 per month plans and madness taking over the industry.",
+    "hook_type": "big claim",
+    "strength": "medium",
+    "why_it_works": "The claim about extreme pricing and 'madness' creates a sense of urgency and surprise, prompting viewers to want to understand what is happening in the AI agent space.",
+    "improvement_ideas": "Make the hook more personal or controversial by adding a direct question or a stronger emotional trigger to increase immediate curiosity and engagement."
+  },
+  "open_loops": [
+    {
+      "text": "What are the specific problems Drake sees in the AI agent space?",
+      "purpose": "Creates curiosity about the critique and insights that will be shared, encouraging viewers to keep watching to learn the details.",
+      "is_resolved": true,
+      "where_resolved": "middle"
+    },
+    {
+      "text": "How did going all-in on the wrong thing affect Drake personally and professionally?",
+      "purpose": "Builds narrative tension by teasing a personal story of loss and regret that viewers want to hear.",
+      "is_resolved": true,
+      "where_resolved": "middle"
+    },
+    {
+      "text": "What does Drake mean by 'template handcuff syndrome' and why is it dangerous?",
+      "purpose": "Introduces a novel concept that hooks viewers interested in practical advice and pitfalls to avoid.",
+      "is_resolved": true,
+      "where_resolved": "middle"
+    },
+    {
+      "text": "Why is originality missing in the AI space and what are the consequences?",
+      "purpose": "Provokes curiosity about industry dynamics and ethical considerations, maintaining viewer interest.",
+      "is_resolved": true,
+      "where_resolved": "late"
+    },
+    {
+      "text": "What moral choice does Drake present about participating in the AI revolution?",
+      "purpose": "Creates a philosophical tension that invites reflection and deeper engagement.",
+      "is_resolved": true,
+      "where_resolved": "late"
+    }
+  ],
+  "structure": {
+    "sections": [
+      {
+        "label": "Hook",
+        "description": "Introduces the chaotic state of the AI agent space and frames the video as sharing personal opinions and problems.",
+        "position": "very_beginning"
+      },
+      {
+        "label": "Problem",
+        "description": "Discusses the dangers of going all-in on the wrong AI platform or idea, including personal losses and leading others astray.",
+        "position": "early"
+      },
+      {
+        "label": "Problem",
+        "description": "Explains the 'template handcuff syndrome' where people rely too much on ready-made solutions instead of learning to build.",
+        "position": "middle"
+      },
+      {
+        "label": "Problem",
+        "description": "Highlights the lack of originality in the AI creator community and the impact on consumers.",
+        "position": "late"
+      },
+      {
+        "label": "Reflection / Moral",
+        "description": "Presents a moral choice about integrity versus profit in the AI revolution and the importance of adaptability.",
+        "position": "late"
+      },
+      {
+        "label": "CTA",
+        "description": "Invites viewers to comment their thoughts and subscribe or like/dislike the video.",
+        "position": "end"
+      }
+    ],
+    "pacing_notes": "The video maintains a steady, conversational pace with moderate energy. It builds engagement through personal stories and industry critique, culminating in a reflective moral appeal before a soft CTA."
+  },
+  "psychology": {
+    "target_audience": "AI creators, builders, entrepreneurs, and consumers interested in AI tools and industry trends.",
+    "main_pain_points": [
+      "Fear of investing time and money in the wrong AI platforms or ideas",
+      "Dependence on templates and lack of skill development",
+      "Confusion and mistrust due to unoriginal or copied content",
+      "Feeling isolated without a community to discuss AI"
+    ],
+    "main_desires": [
+      "To adapt successfully in the fast-changing AI landscape",
+      "To develop foundational skills and principles for AI use",
+      "To find authentic community and meaningful interaction",
+      "To avoid being misled or trapped by outdated solutions"
+    ],
+    "main_objections_addressed": [
+      "Doubt about the value of learning beyond templates",
+      "Resistance to change due to sunk cost fallacy",
+      "Skepticism about the originality and trustworthiness of creators"
+    ],
+    "core_mechanism": "Developing core AI concepts and adaptable principles rather than relying on single platforms or templates.",
+    "credibility_elements": [
+      "Personal experience of income loss and recovery",
+      "Daily use of AI tools and industry observation",
+      "Community leadership and course creation",
+      "Reference to conversations with diverse users including eight-figure entrepreneurs"
+    ]
+  },
+  "ctas": {
+    "primary_ctas": [
+      {
+        "text": "Subscribe if you're new, like this video if you enjoyed it, dislike it if you did not enjoy it, and I will see you in the next one.",
+        "cta_type": "subscribe",
+        "position": "end",
+        "strength": "medium"
+      },
+      {
+        "text": "In the comments, let me know what you think the biggest problems in the AI space are and how we should tackle them.",
+        "cta_type": "like_comment",
+        "position": "end",
+        "strength": "medium"
+      }
+    ],
+    "urgency_or_scarcity": []
+  },
+  "style_and_tone": {
+    "overall_tone": "conversational, reflective, moderately energetic",
+    "language_style": "simple, clear, story-driven with personal anecdotes",
+    "pattern_interrupts": [
+      "Bold claim about $20,000/month AI agent plans",
+      "Repeated disclaimers about opinions not mattering",
+      "Use of coined term 'template handcuff syndrome'",
+      "Moral framing of the AI revolution"
+    ],
+    "memorable_lines": [
+      "Don't fall into the template handcuff syndrome.",
+      "You have to be a Swiss army knife.",
+      "Which side of this revolution do you want to be on?",
+      "I’ll sell you what you want, but I’m gonna give you what you need."
+    ]
+  },
+  "improvement_opportunities": {
+    "hook": [
+      "Start with a more provocative question or direct challenge to increase immediate engagement.",
+      "Use a stronger emotional trigger or personal story in the first 3 seconds."
+    ],
+    "clarity_and_structure": [
+      "Segment the video with clearer signposting or visual/text cues for each main problem.",
+      "Condense some repetitive disclaimers about opinion to maintain tighter focus."
+    ],
+    "offer_and_cta": [
+      "Include a clearer, more compelling CTA with a benefit-driven reason to subscribe or join a community.",
+      "Mention any specific resources or community links to increase opt-in conversion."
+    ],
+    "emotional_impact": [
+      "Add more vivid storytelling or emotional language around personal losses and lessons learned.",
+      "Use more direct empathy statements to connect with viewers’ frustrations."
+    ],
+    "other": [
+      "Incorporate brief examples or visuals illustrating 'template handcuff syndrome' and lack of originality.",
+      "Use more varied vocal tone or pacing to emphasize key points and maintain energy."
+    ]
+  },
+  "_meta": {
+    "video_id": "j5i1m66jKiA",
+    "source": "youtube",
+    "url": "https://www.youtube.com/watch?v=j5i1m66jKiA",
+    "title": "My problem with the ai agent space",
+    "analyzed_at": "2025-11-12T15:57:50.005126+00:00",
+    "model": "gpt-4.1-mini"
+  }
+}

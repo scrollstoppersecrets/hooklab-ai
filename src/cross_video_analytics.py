@@ -344,14 +344,45 @@ def run_cross_video_analytics(
 
     #6.  Top / bottom 20 (by performance_metric) for quick inspection
     combined_sorted = combined.sort_values("performance_metric", ascending=False)
-    top_20 = combined_sorted.head(20)
-    bottom_20 = combined_sorted.tail(20)
+    # Handle smaller dataset sizes
+    n = len(combined_sorted)
+    if n == 0:
+        logger.warning("No rows in combined dataset; skipping top/bottom exports.")
+        return
+    
+    k = min(20, max(1, n // 2)) # <= half the set, at least 1
+    top_k = combined_sorted.head(k)
+    bottom_k = combined_sorted.tail(k)
 
-    top_20.to_csv(output_dir / "top_20_videos.csv", index=False)
-    bottom_20.to_csv(output_dir/"bottom_20_videos.csv", index=False)
+    top_performers_file_name = f"top_{k}_videos.csv"
+    bottom_performers_file_name = f"bottom_{k}_videos.csv"
 
-    logger.info(f"Top 20 videos saved to: {output_dir/'top_20_videos.csv'}")
-    logger.info(f"Botton 20 video saved to: {output_dir / 'bottom_20_videos.csv'}")
+    path_to_top_performers_file = output_dir / top_performers_file_name
+    path_to_bottom_performers_file = output_dir / bottom_performers_file_name
+
+    top_k.to_csv(path_to_top_performers_file, index=False)
+    bottom_k.to_csv(path_to_bottom_performers_file, index=False)
+
+    logger.info(f"Top {k} videos saved to: {path_to_top_performers_file}")
+    logger.info(f"Bottom {k} videos saved to: {path_to_bottom_performers_file}")
+
+    # Always write fixed top/bottom 20 when dataset is large enough
+    if n >= 40:
+        top20_path = output_dir / "top_20_videos.csv"
+        bottom20_path = output_dir / "bottom_20_videos.csv"
+        combined_sorted.head(20).to_csv(top20_path, index=False)
+        combined_sorted.tail(20).to_csv(bottom20_path, index=False)
+        logger.info(f"Top 20 videos saved to: {top20_path}")
+        logger.info(f"Bottom 20 videos saved to: {bottom20_path}")
+    # Top 20/Bottom 20 results of the larger datasets
+    # top_20 = combined_sorted.head(20)
+    # bottom_20 = combined_sorted.tail(20)
+
+    # top_20.to_csv(output_dir / "top_20_videos.csv", index=False)
+    # bottom_20.to_csv(output_dir/"bottom_20_videos.csv", index=False)
+
+    # logger.info(f"Top 20 videos saved to: {output_dir/'top_20_videos.csv'}")
+    # logger.info(f"Botton 20 video saved to: {output_dir / 'bottom_20_videos.csv'}")
 
     #7 Summary table
     tables = build_summary_tables(combined)
