@@ -119,7 +119,7 @@ def add_performance_metric_column(df: pd.DataFrame) -> pd.DataFrame:
         2) If not present, compute 'relative_performance_index' with the formula above.
     """
 
-    rpi_col = "Relative Performance Index (PRI)"
+    rpi_col = "Relative Performance Index (RPI)"
 
     if rpi_col in df.columns:
         logger.info(f"using existing '{rpi_col}' as performance metric")
@@ -135,7 +135,8 @@ def add_performance_metric_column(df: pd.DataFrame) -> pd.DataFrame:
 # ----- LLM analysis loading ------------
 def load_llm_analyses(analysis_dir: Optional[Path] = None) -> pd.DataFrame:
     """
-        Load all *_llm_analysis_*.json files and flatten useful fields into a DataFrame
+    Load all *_llm_analysis_*.json files and flatten useful fields into a DataFrame
+    including hooks, loops, CTAs, psychology, and style/tone
     """
 
     analysis_dir = analysis_dir or ANALYSIS_DIR
@@ -150,6 +151,7 @@ def load_llm_analyses(analysis_dir: Optional[Path] = None) -> pd.DataFrame:
     logger.info(f"Found {len(files)} LLM analysis files in {analysis_dir}")
 
     rows: list[Dict[str, Any]] = []
+
     for path in files:
         with path.open("r", encoding="utf-8") as f:
             data = json.load(f)
@@ -162,8 +164,51 @@ def load_llm_analyses(analysis_dir: Optional[Path] = None) -> pd.DataFrame:
         open_loops = data.get("open_loops", {}) or {}
         improvement = data.get("improvement_opportunities", {}) or {}
 
+        # Open loops
+        loops_list = open_loops if isinstance(open_loops, list) else []
+        loops_count = len(loops_list)
+        unresolved_count = sum(1 for l in loops_list if not l.get("is_resolved", False))
+        where_values = [l.get("where_resolved") for l in loops_list if l.get("where_resolved")]
+        loops_mode = None
+        if where_values:
+            s = pd.Series(where_values)
+            loops_mode = s.mode().iloc[0] if not s.mode().empty else None
+        loops_sample = " | ".join([l.get("text", "") for l in loops_list[:2] if l.get("text")])
+
+        # CTAs
+        primary_ctas = ctas.get("primary_ctas") or []
+        primary_ctas = primary_ctas if isinstance(primary_ctas, list) else []
+        cta_count = len(primary_ctas)
+        cta_types = sorted({(c.get("cta_type") or "").strip() for c in primary_ctas if c.get("cta_type")})
+        cta_types_joined = ";".join(cta_types) if cta_types else None
+
+        def _pos_count(pos: str) -> int:
+            return sum(1 for c in primary_ctas if (c.get("position") or "").lower() == pos)
+        
+        cta_pos_early = _pos_count("early")
+        cta_pos_middle = _pos_count("middle")
+        cta_pos_late = _pos_count("late")
+
+        # Psychology
+        pains = psychology.get("main_pain_points") or []
+        desires = psychology.get("main_desires") or []
+        objections = psychology.get("main_objections_addrressed") or []
+        pains_top3 = "; ".join(pains[:3]) if pains else None
+        desires_top3 = "; ".join(desires[:3]) if desires else None
+        objections_top3 = "; ".join(objections[:3]) if objections else None
+        credibitily = psychology.get("credibility_elements") or []
+        credibility_count = len(credibitily)
+        credibility_sample = credibitily[0] if credibitily else None
+
+        # Style & tone
+        pattern_interrupts = style.get("pattern_interrupts") or []
+        pattern_interrupts_count = len(pattern_interrupts)
+        memmorable_lines = style.get("memorable_lines") or []
+        memmorable_line_sample = memmorable_lines[0] if memmorable_lines else None
+
         row: Dict[str, Any] = {
-                        "video_id": meta.get("video_id"),
+            # meta
+            "video_id": meta.get("video_id"),
             "source": meta.get("source"),
             "url": meta.get("url"),
             "title": meta.get("title"),
@@ -176,21 +221,38 @@ def load_llm_analyses(analysis_dir: Optional[Path] = None) -> pd.DataFrame:
             "hook_strength": hook.get("strength"),
             "hook_why_it_works": hook.get("why_it_works"),
 
-            # Counts / simple aggregates
-            "open_loops_count": len(open_loops),
-            "primary_ctas_count": len(ctas.get("primary_ctas", []) or []),
+            # Open loops
+            # "open_loops_count": len(open_loops),
+            "open_loops_count": loops_count,
+            "unresolved_loops_count": unresolved_count,
+            "loops_where_resolved_mode": loops_mode,
+            "open_loops_sample": loops_sample,
 
-                  # Psychology
+            # CTAs
+            "primary_ctas_count": cta_count,
+            "cta_types": cta_types_joined,
+            "cta_pos_early": cta_pos_early,
+            "cta_pos_middle": cta_pos_middle,
+            "cta_pos_late": cta_pos_late,
+
+            # Psychology
             "target_audience": psychology.get("target_audience"),
             "core_mechanism": psychology.get("core_mechanism"),
             "pain_points_count": len(psychology.get("main_pain_points", []) or []),
             "desires_count": len(psychology.get("main_desires", []) or []),
             "objections_count": len(psychology.get("main_objections_addressed", []) or []),
+            "pain_points_top3": pains_top3,
+            "desires_top3": desires_top3,
+            "objections_top3": objections_top3,
+            "credibility_count": credibility_count,
+            "credibility_sample": credibility_sample,
 
             # Tone & style
             "overall_tone": style.get("overall_tone"),
             "language_style": style.get("language_style"),
             "pattern_interrupts_count": len(style.get("pattern_interrupts", []) or []),
+            "memorable_lines_count": memmorable_lines,
+            "memorable_line_sample": memmorable_line_sample,
 
             # Improvement
             "improve_hook_count": len(improvement.get("hook", []) or []),
@@ -227,6 +289,8 @@ def add_performance_buckets(df: pd.DataFrame) -> pd.DataFrame:
         f"(low <= {q_low:.2f}, high >= {q_high:.2f})"
     )
 
+    df = df.copy()
+    df["performance_bucket"] = metric.apply(label)
     return df
 
 def build_summary_tables(combined: pd.DataFrame) -> dict[str, pd.DataFrame]:
@@ -254,7 +318,7 @@ def build_summary_tables(combined: pd.DataFrame) -> dict[str, pd.DataFrame]:
             combined.groupby(["hook_strength", "performance_bucket"])
             .agg(
                 count=("video_id", "count"),
-                avg_metric=("performance_metric", "metric"),
+                avg_metric=("performance_metric", "mean"),
             )
             .reset_index()
         )
@@ -273,7 +337,7 @@ def build_summary_tables(combined: pd.DataFrame) -> dict[str, pd.DataFrame]:
         tables["tone_vs_performance"] = tone_perf
 
     # Pattern interrupts count vs performance
-    if "perttern_interrupts_count" in combined.columns:
+    if "pattern_interrupts_count" in combined.columns:
         tmp = combined.copy()
         tmp["pattern_interrupts_bucket"] = pd.cut(
             tmp["pattern_interrupts_count"],
