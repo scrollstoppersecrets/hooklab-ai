@@ -6,20 +6,33 @@ from typing import Optional, Dict, Any
 import yt_dlp
 from loguru import logger
 
-from .config import DOWNLOADS_DIR, YTDLP_OUTPUT_TEMPLATE, DEFAULT_AUDIO_FORMAT
+from .config import (
+    DOWNLOADS_DIR, 
+    YTDLP_OUTPUT_TEMPLATE, 
+    DEFAULT_AUDIO_FORMAT,
+    COOKIEFILE
+)
 
 def _build_yt_dlp_opts() -> Dict[str, Any]:
     """
     Building the options dictionary for yt-dlp
     """
-
-    return {
+    opt: Dict[str, Any] = {
+        # Download best available audio
         "format": DEFAULT_AUDIO_FORMAT,
+        # Save to data/downloads/{video_id}.{ext}
         "outtmpl": YTDLP_OUTPUT_TEMPLATE,
+        # Don't playlists specially - just download the single URL
         "noplaylist": True,
+        # maike it quiter - logging controled via loguru
         "quiet": True,
         "no_warnings": True
     }
+
+    if COOKIEFILE: 
+        opt["cookiefile"] = COOKIEFILE
+        
+    return opt
 
 def download_audio(youtube_url: str) -> Optional[Path]:
     """

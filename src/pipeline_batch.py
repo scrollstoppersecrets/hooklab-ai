@@ -3,10 +3,19 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Optional
 
+import random, time
+
 import pandas as pd
 from loguru import logger
 
-from .config import ANALYSIS_DIR
+from .config import (
+    ANALYSIS_DIR, 
+    MIN_DOWNLOAD_SLEEP_SECONDS, 
+    MAX_DOWNLOAD_SLEEP_SECONDS, 
+    MAX_VIDEOS_PER_RUN,
+    LOGS_DIR,
+)
+
 from .cross_video_analytics import load_metrics
 from .youtube_downloader import download_audio
 from .transcriber import transcribe_file
@@ -77,14 +86,14 @@ def process_video_row(row: pd.Series) -> None:
 
     try:
         # 2. Transcribe
-        trancribe_results = transcribe_file(audio_path)
+        transcribe_results = transcribe_file(audio_path)
 
         # 3. Build and save transcript record
         record = create_transcript_record(
             source="youtube",
             url=url,
             download_path=audio_path,
-            transcript_result=trancribe_results,
+            transcript_result=transcribe_results,
             video_id=video_id,
             title=title,
             # Placeholder for raw metrics metrics={}
@@ -113,6 +122,12 @@ def run_batch(batch_size: Optional[int] = None) -> None:
     """
     Run the pipeline for a batch of videos from the metrics CSV.
 
+    Strategy: 
+    - Load all metrics
+    - Filter to only videos that do NOT yet have LLM analysis (unprocessed).
+    - Apply batch_size / MAX_VIDEOS_PER_RUN as a limit on that upprocessed subset.
+    - Process those rows one by one with random sleep between them.
+
     - If batch_size is None: process all rows.
     - If batch_size is an int: process only that many rows (from the top).
 
@@ -123,19 +138,66 @@ def run_batch(batch_size: Optional[int] = None) -> None:
     # You can filter here if you only want to recent videos, e.g. <= 365 days
     # metrics_df = metrics_df[metrics_df["videoAgeInDays"] <= 365]
 
-    if batch_size is not None:
-        logger.info(f"Running batch for first {batch_size} rows of metrics...")
-        metrics_df = metrics_df.head(batch_size)
+
+    # Build a filter DataFrame on only "unprocessed" videos
+    def _row_unprocessed(row: pd.Series) -> bool:
+        video_id = str(row.get("videoId") or "").strip()
+        if not video_id:
+            return False
+        return not _is_already_processed(video_id)
+    
+    unprocessed_df = metrics_df[metrics_df.apply(_row_unprocessed, axis=1)]
+
+    logger.info(
+        f"Found {len(unprocessed_df)} unprocessed videos out of "
+        f"{len(metrics_df)} total."
+    )
+
+    # Decide the effective limit for this run
+    limit: Optional[int] = None
+
+    # if batch_size is not None:
+    #     logger.info(f"Running batch for first {batch_size} rows of metrics...")
+    #     metrics_df = metrics_df.head(batch_size)
+    # else:
+    #     logger.info("Running batch for ALL rowa in metrics CSV...")
+    if batch_size is not None and batch_size > 0:
+        limit = batch_size
+
+    if MAX_VIDEOS_PER_RUN and MAX_VIDEOS_PER_RUN > 0:
+        limit = min(limit, MAX_VIDEOS_PER_RUN) if limit is not None else MAX_VIDEOS_PER_RUN
+
+    if limit is not None:
+        logger.info(f"Limiting this run to {limit} unprecessed video.")
+        unprocessed_df = unprocessed_df.head(limit)
     else:
-        logger.info("Running batch for ALL rowa in metrics CSV...")
+        logger.info("No per-run limit set; processing all unprocessed videos.")
 
     # Iterate row by row
-    for idx, row in metrics_df.iterrows():
+    for idx, row in unprocessed_df.iterrows():
         logger.info(f"--- Processing row index={idx} videoId={row.get('videoId')} ----")
         process_video_row(row)
 
+        # Random jitter between videos to avoid hammering tooo many requests
+        delay = random.uniform(MIN_DOWNLOAD_SLEEP_SECONDS, MAX_DOWNLOAD_SLEEP_SECONDS)
+        logger.info(f"Sleeping {delay: .1f}s belay next video ...")
+        time.sleep(delay)
+
 if __name__ == "__main__":
     import sys
+
+    # Configure file logging for this run
+    log_file = LOGS_DIR / "pipeline_batch_{time}.log"
+    logger.add(
+        log_file,
+        rotation="10 MB",
+        retention="14 days",
+        compression="zip",
+        enqueue=True,
+        backtrace=True,
+        diagnose=True,
+    )
+    logger.info(f"Logging to file: {log_file}")
 
     # Allow optional batch from CLI: python -m src.pipeline_batch [batch_size]
     if len(sys.argv) > 1:

@@ -2,7 +2,11 @@
 # Data folders we don't want in git
 data/downloads/
 data/transcripts/
+data/analysis/
+data/metrics/
+logs/
 
+cookies.txt
 # Local sanity / scratch code
 sanity_checks/
 
